@@ -1,4 +1,4 @@
-Auto Fuzzing with Fuff Including DNS Fuzz for Sub Domains.<br>
+Auto Fuzzing with Fuff Including DNS Fuzz for Sub Domains<br>
 Useful For Quick Fuzzing, Red Teams & CTF's<br>
 <br>
 Installation:<br>
