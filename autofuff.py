@@ -25,7 +25,7 @@ def get_options(select):
         wordlists = parser.add_mutually_exclusive_group()
         wordlists.add_argument('-w', '--wordlist', dest='WORDLIST', action='store_const', const='wordlists', help='Choose Wordlist')
         options = parser.parse_args()
-        menu_list = os.listdir(f'{seclists_dir}/SecLists/Discovery/DNS/')
+        menu_list = os.listdir(f'{seclists_dir}/Discovery/DNS/')
         options.WORDLIST = menu_with_custom_choice("Choose Wordlist", menu_list)
         return options
     else:
@@ -33,7 +33,7 @@ def get_options(select):
         wordlists = parser.add_mutually_exclusive_group()
         wordlists.add_argument('-w', '--wordlist', dest='WORDLIST', action='store_const', const='wordlists', help='Choose Wordlist')
         options = parser.parse_args()
-        menu_list = os.listdir(f'{seclists_dir}/SecLists/Discovery/Web-Content/')
+        menu_list = os.listdir(f'{seclists_dir}/Discovery/Web-Content/')
         options.WORDLIST = menu_with_custom_choice("Choose Wordlist", menu_list)
         return options
 
