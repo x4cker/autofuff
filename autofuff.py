@@ -5,7 +5,7 @@ import subprocess
 import os
 import requests
 
-seclists_dir = '' # SecLists Directory - Example : /root/SecLists
+seclists_dir = '' # SecLists Directory - Example : /root/SecLists , Download Link : https://github.com/danielmiessler/SecLists
 
 def menu(title, menu_list):
     menu = TerminalMenu(menu_list, title=title)
