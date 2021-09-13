@@ -50,18 +50,22 @@ def subd():
     else:
         ignore_code = "400"
     if len(filter_words) >= 1:
+        filter_words_max = int(filter_words) + 99999
+        filter_worder = str(filter_words) + "-" + str(filter_words_max)
         pass
     else:
-        filter_words = "10"
+        filter_words = "3"
+        filter_words_max = int(filter_words) + 99999
+        filter_worder = str(filter_words) + "-" + str(filter_words_max)
     url = url.replace("\n", "")
     if "FUZZ" in url:
         if url[-4:] == "FUZZ" or "FUZZ" in url[-7:]:
             agression = input("(A)gressive or (C)ustom Wordlist? ")
             if "C" in agression or "c" in agression:
                 custom_wordlist = get_options("TEST")
-                xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -c -ic -w {seclists_dir}/Discovery/Web-Content/{custom_wordlist.WORDLIST} -u {url} -mw {filter_words} -fc 404,429,{ignore_code} -recursion -recursion-depth 3 -H "User-Agent: Im4Ph0n3_Bu7n07r34lly"'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""", shell=True)
+                xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -c -ic -w {seclists_dir}/Discovery/Web-Content/{custom_wordlist.WORDLIST} -u {url} -mw {filter_worder} -fc 404,429,{ignore_code} -recursion -recursion-depth 3 -H "User-Agent: Im4Ph0n3_Bu7n07r34lly"'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""", shell=True)
             else:
-                xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -c -ic -w {seclists_dir}/Discovery/Web-Content/directory-list-lowercase-2.3-big.txt -u {url} -mw {filter_words} -fc 404,429,{ignore_code} -recursion -recursion-depth 3 -H "User-Agent: Im4Ph0n3_Bu7n07r34lly"'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""", shell=True)
+                xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -c -ic -w {seclists_dir}/Discovery/Web-Content/directory-list-lowercase-2.3-big.txt -u {url} -mw {filter_worder} -fc 404,429,{ignore_code} -recursion -recursion-depth 3 -H "User-Agent: Im4Ph0n3_Bu7n07r34lly"'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""", shell=True)
             sleep(1)
         else:
             if "http://" in url:
@@ -69,11 +73,11 @@ def subd():
                 urlstrip = url.replace("http://", "").replace("\n", "")
                 agression = input("(A)gressive or (C)ustom Wordlist? ")
                 if "A" in agression or "a" in agression:
-                        xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -ic -c -w {seclists_dir}/Discovery/DNS/dns-Jhaddix.txt -u {urlfuzz} -H "Host: {urlstrip}" -mw {filter_words} -fc 404,429,{ignore_code}'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""", shell=True)
+                        xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -ic -c -w {seclists_dir}/Discovery/DNS/dns-Jhaddix.txt -u {urlfuzz} -H "Host: {urlstrip}" -mw {filter_worder} -fc 404,429,{ignore_code}'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""", shell=True)
                 else:
                     if "C" in agression or "c" in agression or "" in agression:
                         custom_wordlist = get_options("DNS")
-                        xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -ic -c -w {seclists_dir}/Discovery/DNS/{custom_wordlist.WORDLIST} -u {urlfuzz} -H "Host: {urlstrip}" -mw {filter_words} -fc 404,429,{ignore_code}'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""",shell=True)
+                        xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -ic -c -w {seclists_dir}/Discovery/DNS/{custom_wordlist.WORDLIST} -u {urlfuzz} -H "Host: {urlstrip}" -mw {filter_worder} -fc 404,429,{ignore_code}'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""",shell=True)
             elif "https://" in url:
                 url.replace("\n", "")
                 urlstrip = url.replace("https://", "").replace("\n", "")
@@ -81,11 +85,11 @@ def subd():
                 agression = input("(A)gressive or (C)ustom Wordlist? ")
                 if "A" in agression or "a" in agression:
 
-                    xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -ic -c -w {seclists_dir}/Discovery/DNS/dns-Jhaddix.txt -u {urlfuzz} -H "Host: {urlstrip}" -mw {filter_words} -fc 404,429,{ignore_code}'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""",shell=True)
+                    xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -ic -c -w {seclists_dir}/Discovery/DNS/dns-Jhaddix.txt -u {urlfuzz} -H "Host: {urlstrip}" -mw {filter_worder} -fc 404,429,{ignore_code}'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""",shell=True)
                 else:
                     if "C" in agression or "c" in agression or "" in agression:
                         custom_wordlist = get_options("DNS")
-                        xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -ic -c -w {seclists_dir}/Discovery/DNS/{custom_wordlist.WORDLIST} -u {urlfuzz} -H "Host: {urlstrip}" -mw {filter_words} -fc 404,429,{ignore_code}'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""",shell=True)
+                        xterm = subprocess.Popen(f"""xterm -geometry 100x24 -T 'FUZZER' -hold -e 'ffuf -ic -c -w {seclists_dir}/Discovery/DNS/{custom_wordlist.WORDLIST} -u {urlfuzz} -H "Host: {urlstrip}" -mw {filter_worder} -fc 404,429,{ignore_code}'| GREP_COLOR='01;36' grep --color=always -E '|200|INFO|301|$' > /dev/null 2>&1 &""",shell=True)
             else:
                 print("\n[X] Please Type HTTP or HTTPS[X]\n")
                 sleep(1)
